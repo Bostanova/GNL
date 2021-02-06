@@ -6,15 +6,15 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 03:12:39 by eerika            #+#    #+#             */
-/*   Updated: 2021/02/05 01:01:58 by eerika           ###   ########.fr       */
+/*   Updated: 2021/02/06 12:15:51 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	check_new_line(char *str)
+int		check_new_line(char *str)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	if (!str)
@@ -34,9 +34,9 @@ int	check_new_line(char *str)
 
 char	*change_alloc(char *stat_buf)
 {
-	int	i;
-	int	j;
-	char	*result;
+	int			i;
+	int			j;
+	char		*result;
 
 	i = 0;
 	j = 0;
@@ -49,15 +49,12 @@ char	*change_alloc(char *stat_buf)
 		free(stat_buf);
 		return (0);
 	}
-	if (!(result = malloc((ft_strlen(stat_buf) - i) + 1)))
+	result = malloc((ft_strlen(stat_buf) - i) + 1);
+	if (!result)
 		return (0);
 	i++;
 	while (stat_buf[i])
-	{
-		result[j] = stat_buf[i];
-		i++;
-		j++;
-	}
+		result[j++] = stat_buf[i++];
 	result[j] = '\0';
 	free(stat_buf);
 	return (result);
@@ -65,8 +62,8 @@ char	*change_alloc(char *stat_buf)
 
 char	*copy_from_static(char *str)
 {
-	int	i;
-	char	*result;
+	int			i;
+	char		*result;
 
 	i = 0;
 	if (!str)
@@ -90,31 +87,31 @@ char	*copy_from_static(char *str)
 	return (result);
 }
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	static char	*stat_buf;
 	char		*buffer;
-	int			len_for_eof;
+	int			len_to_eof;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);
 	if (!(buffer = malloc(BUFFER_SIZE + 1)))
 		return (-1);
-	len_for_eof = 1;
-	while (!check_new_line(stat_buf) && len_for_eof != 0)
+	len_to_eof = 1;
+	while (!check_new_line(stat_buf) && len_to_eof != 0)
 	{
-		if ((len_for_eof = read(fd, buffer, BUFFER_SIZE)) == -1)
+		if ((len_to_eof = read(fd, buffer, BUFFER_SIZE)) == -1)
 		{
 			free(buffer);
 			return (-1);
 		}
-		buffer[len_for_eof] = '\0';
+		buffer[len_to_eof] = '\0';
 		stat_buf = ft_strjoin(stat_buf, buffer);
 	}
 	free(buffer);
 	*line = copy_from_static(stat_buf);
 	stat_buf = change_alloc(stat_buf);
-	if (len_for_eof == 0)
+	if (len_to_eof == 0)
 		return (0);
 	return (1);
 }

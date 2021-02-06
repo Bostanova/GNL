@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:19:29 by eerika            #+#    #+#             */
-/*   Updated: 2021/02/04 22:35:48 by marvin           ###   ########.fr       */
+/*   Updated: 2021/02/06 11:30:35 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
-	int i;
+	int				i;
 
 	i = 0;
 	if (!s)
@@ -27,7 +26,7 @@ size_t	ft_strlen(const char *s)
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	size_t		i;
+	size_t			i;
 	unsigned char	*res;
 	unsigned char	*str;
 
@@ -46,7 +45,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t		i;
+	size_t			i;
 	unsigned char	*res;
 	unsigned char	*str;
 
@@ -67,9 +66,9 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*result;
-	size_t	s1_length;
-	size_t	s2_length;
+	char			*result;
+	size_t			s1_length;
+	size_t			s2_length;
 
 	if (!s1 && !s2)
 	{
